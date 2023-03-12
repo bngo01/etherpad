@@ -18,6 +18,8 @@ RUN curl -SL \
 
 WORKDIR etherpad-lite
 
+#COPY installDeps.sh src/bin
+
 RUN bin/installDeps.sh \
     && rm settings.json
 COPY entrypoint.sh /entrypoint.sh
