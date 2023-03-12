@@ -8,10 +8,14 @@ services:
     volumes:
       - db:/var/lib/mysql
     hostname: mysql
+     
+      #  app:
+      #    build:
+      #      context: .
+      #      dockerfile: Dockerfile
+
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: etherpad:test
     restart: on-failure:10
     ports:
       - 9001:9001

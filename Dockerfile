@@ -2,7 +2,7 @@ FROM node:lts
 
 ENV ETHERPAD_VERSION 1.8.18
 
-ENV NODE_ENV production
+ENV NODE_ENV development
 
 RUN apt-get update && \
     apt-get upgrade -y && \
