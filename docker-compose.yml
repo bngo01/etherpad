@@ -4,7 +4,7 @@ services:
   db:
     image: mariadb:latest
     restart: on-failure:5
-    env_file: mariadb.env
+    #    env_file: mariadb.env
     volumes:
       - db:/var/lib/mysql
     hostname: mysql
@@ -19,7 +19,7 @@ services:
     restart: on-failure:10
     ports:
       - 9001:9001
-    env_file: etherpad.env
+        #    env_file: etherpad.env
     security_opt:
       - no-new-privileges:true
     healthcheck:
