@@ -2,11 +2,6 @@
 set -e
 
 : ${MYSQL_PORT_3306_TCP_ADDR:=mysql}
-: ${ETHERPAD_TITLE:=Etherpad}
-: ${ETHERPAD_PORT:=9001}
-: ${ETHERPAD_DB_NAME:=etherpad}
-: ${ETHERPAD_DB_USER:=root}
-: ${ETHERPAD_DB_PASSWORD:=db_secret123}
 
 if [ -z "$MYSQL_PORT_3306_TCP_ADDR" ]; then
 	echo >&2 'error: missing MYSQL_PORT_3306_TCP environment variable'
@@ -16,9 +11,11 @@ fi
 
 # if we're linked to MySQL, and we're using the root user, and our linked
 # container has a default "root" password set up and passed through... :)
+: ${ETHERPAD_DB_USER:=root}
 if [ "$ETHERPAD_DB_USER" = 'root' ]; then
 	: ${ETHERPAD_DB_PASSWORD:=$MYSQL_ENV_MYSQL_ROOT_PASSWORD}
 fi
+: ${ETHERPAD_DB_NAME:=etherpad}
 
 ETHERPAD_DB_NAME=$( echo $ETHERPAD_DB_NAME | sed 's/\./_/g' )
 
@@ -30,6 +27,8 @@ if [ -z "$ETHERPAD_DB_PASSWORD" ]; then
 	exit 1
 fi
 
+: ${ETHERPAD_TITLE:=Etherpad}
+: ${ETHERPAD_PORT:=9001}
 
 # Check if database already exists
 RESULT=`mysql -u${ETHERPAD_DB_USER} -p${ETHERPAD_DB_PASSWORD} \
@@ -81,7 +80,7 @@ if [ ! -f settings.json ]; then
 	EOF
 fi
 
-#echo "Installing plugins..."
+echo "NOT Installing plugins..."
 #if [ $ETHERPAD_PLUGINS ]; then
 #	IFS=',' read -r -a PLUGIN_LIST <<< "$ETHERPAD_PLUGINS"
 #	for PLUGIN in "${PLUGIN_LIST[@]}"
