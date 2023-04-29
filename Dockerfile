@@ -4,7 +4,7 @@ ENV ETHERPAD_VERSION 1.8.18
 
 ENV NODE_ENV development
 
-ARG ETHERPAD_PLUGINS="ep_adminpads2 ep_headings2"
+ARG ETHERPAD_PLUGINS="ep_adminpads2 ep_headings2 ep_ldapauth_ng"
 
 WORKDIR /opt/
 
