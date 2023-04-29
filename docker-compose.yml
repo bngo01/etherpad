@@ -15,7 +15,7 @@ services:
       #      dockerfile: Dockerfile
 
   app:
-    image: etherpad.new:test
+    image: etherpad:test
     restart: on-failure:10
     ports:
       - 9001:9001
